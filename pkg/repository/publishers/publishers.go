@@ -5,7 +5,6 @@ import (
 	"gorm.io/gorm"
 )
 
-type GetAll func() ([]*model.Publisher, error)
 type Create func(book *model.Publisher) error
 
 func NewCreate(db *gorm.DB) Create {
@@ -13,6 +12,8 @@ func NewCreate(db *gorm.DB) Create {
 		return db.Create(p).Error
 	}
 }
+
+type GetAll func() ([]*model.Publisher, error)
 
 func NewGetAll(db *gorm.DB) GetAll {
 	return func() ([]*model.Publisher, error) {

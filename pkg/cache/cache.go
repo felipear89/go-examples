@@ -8,7 +8,8 @@ func WithCache[V any](cache *Cache, k string, f func() (V, error)) (V, error) {
 	}
 	v, err := f()
 	if err != nil {
-		return v, err
+		var zero V
+		return zero, err
 	}
 	cache.Set(k, v, DefaultExpiration)
 	return v, nil
